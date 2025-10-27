@@ -1,25 +1,34 @@
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        dummyHead = ListNode(0)
-        tail = dummyHead
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: Optional[ListNode]
+        :type l2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        dummy = ListNode()   # dummy node to simplify result list construction
+        curr = dummy
         carry = 0
 
-        while l1 is not None or l2 is not None or carry != 0:
-            digit1 = l1.val if l1 is not None else 0
-            digit2 = l2.val if l2 is not None else 0
+        # loop until both lists are exhausted and no carry remains
+        while l1 or l2 or carry:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
 
-            sum = digit1 + digit2 + carry
-            digit = sum % 10
-            carry = sum // 10
+            total = val1 + val2 + carry
+            carry = total // 10     # compute new carry
+            curr.next = ListNode(total % 10)  # create new node with digit
+            curr = curr.next
 
-            newNode = ListNode(digit)
-            tail.next = newNode
-            tail = tail.next
+            # move to the next nodes
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
 
-            l1 = l1.next if l1 is not None else None
-            l2 = l2.next if l2 is not None else None
-
-        result = dummyHead.next
-        dummyHead.next = None
-        return result
-        
+        return dummy.next
