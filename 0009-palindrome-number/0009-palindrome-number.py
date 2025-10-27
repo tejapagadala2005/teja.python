@@ -1,14 +1,13 @@
-class Solution:
-    def isPalindrome(self, x: int) -> bool:
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        # Negative numbers are not palindromes
         if x < 0:
             return False
         
-        rev = 0
-        num = x
-        
-        while num != 0:
-            rev = rev * 10 + num % 10
-            num = num // 10
-        
-        return rev == x
-        
+        # Convert to string and check if it reads the same backward
+        return str(x) == str(x)[::-1]
+
