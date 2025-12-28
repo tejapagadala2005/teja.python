@@ -1,0 +1,26 @@
+class account:
+    def __init__(self,balance,accno):
+        self.balance=balance
+        self.accno=accno
+    def debit(self,amount):
+        if self.balance>amount:
+            self.balance-=amount
+            print(f"{amount} is debited,bal is{self.getbal()}")
+        else:
+            print("insufficient balance")
+    def credit(self,amount):
+        self.balance+=amount
+        print(f"{amount} is credited,bal is{self.getbal()}")
+    def getbal(self):
+        return self.balance
+class savingsaccount(account):
+    def __init__(self,intrest):
+        self.intrest=intrest
+        super().__init__(1000,"acc123")
+    def intrestrate(self):
+        intrest1=self.balance*(self.intrest/100)
+        self.balance+=intrest1
+        print(self.getbal())
+acc1=savingsaccount(5)
+acc1.credit(500)
+acc1.intrestrate()
