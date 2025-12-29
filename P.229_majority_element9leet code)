@@ -1,0 +1,25 @@
+def majorityElement(nums):
+    c1=0
+    c2=0
+    num1=num2=None 
+    for num in nums:
+        if num==num1:
+            c1+=1 
+        elif num==num2:
+            c2+=1 
+        elif c1==0:
+            num1=num
+        elif c2==0:
+            num2=num 
+            c2=1 
+        else:
+            c1-=1 
+            c2-=1 
+    k=[]
+    if nums.count(num1)>len(nums)//3:
+        k.append(num1)
+    if nums.count(num2)>len(nums)//3:
+        k.append(num2)
+    print(k)
+nums=list(map(int,input().split()))
+majorityElement(nums)
